@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "SwordComponent.h"
 #include "IsekaiRPGCharacter.generated.h"
 
 class USpringArmComponent;
@@ -49,6 +50,16 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* MouseLookAction;
 
+	//Attack Actions
+	UPROPERTY(EditAnywhere, BluePrintReadOnly, Category = "Input")
+	UInputAction* LightAttackAction;
+
+	UPROPERTY(EditAnywhere, BluePrintReadOnly, Category = "Input")
+	UInputAction* HeavyAttackAction;
+
+	UPROPERTY(EditAnywhere, BluePrintReadOnly, Category = "Input")
+	UInputAction* Block;
+
 public:
 
 	/** Constructor */
@@ -84,6 +95,10 @@ public:
 	/** Handles jump pressed inputs from either controls or UI interfaces */
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoJumpEnd();
+
+	//Sword Attacks
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	class ASwordComponent* SwordComoponent;
 
 public:
 

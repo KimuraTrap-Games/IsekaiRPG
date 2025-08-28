@@ -12,6 +12,7 @@
 #include "InputActionValue.h"
 #include "IsekaiRPG.h"
 
+
 AIsekaiRPGCharacter::AIsekaiRPGCharacter()
 {
 	// Set size for collision capsule
@@ -48,6 +49,9 @@ AIsekaiRPGCharacter::AIsekaiRPGCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	// Create Sword Component
+	SwordComoponent = CreateDefaultSubobject<ASwordComponent>(TEXT("SwordComponent"));
 }
 
 void AIsekaiRPGCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -65,6 +69,13 @@ void AIsekaiRPGCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AIsekaiRPGCharacter::Look);
+
+		//Combat - Check if sword is equipped
+		EnhancedInputComponent->BindAction(LightAttackAction, ETriggerEvent::Started, SwordComoponent, &ASwordComponent::LightAttack);
+		EnhancedInputComponent->BindAction(HeavyAttackAction, ETriggerEvent::Started, SwordComoponent, &ASwordComponent::HeavyAttack);
+		EnhancedInputComponent->BindAction(Block, ETriggerEvent::Started, SwordComoponent, &ASwordComponent::StartBlocking);
+		EnhancedInputComponent->BindAction(Block, ETriggerEvent::Completed, SwordComoponent, &ASwordComponent::StopBlocking);
+
 	}
 	else
 	{
