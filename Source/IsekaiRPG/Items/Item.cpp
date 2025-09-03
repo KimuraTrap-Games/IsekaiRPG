@@ -3,6 +3,7 @@
 
 #include "Items/Item.h"
 
+
 // Sets default values
 AItem::AItem()
 {
@@ -16,8 +17,6 @@ void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Warning, TEXT("Item Spawned"));
-	
 }
 
 // Called every frame
