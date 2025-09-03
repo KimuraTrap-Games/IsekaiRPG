@@ -20,6 +20,8 @@ ASwordComponent::ASwordComponent()
 void ASwordComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
+	UE_LOG(LogTemp, Warning, TEXT("Sword Component Initialized"));
 	
 }
 
